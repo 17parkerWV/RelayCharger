@@ -21,18 +21,18 @@
     <ClInclude Include="__vm\.BatteryCharger.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\arrayOP.h">
+    <ClInclude Include="..\arrayOP.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Desktop\TM1637\TM1637Display.h">
+    <ClInclude Include="..\..\..\BatteryCharger\TM1637\TM1637Display.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Desktop\arrayOP.cpp">
+    <ClCompile Include="..\arrayOP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Desktop\TM1637\TM1637Display.cpp">
+    <ClCompile Include="..\..\..\BatteryCharger\TM1637\TM1637Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
