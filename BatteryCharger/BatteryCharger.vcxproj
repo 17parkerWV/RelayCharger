@@ -112,13 +112,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\BatteryCharger\TM1637\TM1637Display.h" />
     <ClInclude Include="..\arrayOP.h" />
+    <ClInclude Include="TM1637\TM1637Display.h" />
     <ClInclude Include="__vm\.BatteryCharger.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\BatteryCharger\TM1637\TM1637Display.cpp" />
     <ClCompile Include="..\arrayOP.cpp" />
+    <ClCompile Include="TM1637\TM1637Display.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

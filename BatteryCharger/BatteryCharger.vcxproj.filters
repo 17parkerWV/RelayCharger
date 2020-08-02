@@ -24,7 +24,7 @@
     <ClInclude Include="..\arrayOP.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\BatteryCharger\TM1637\TM1637Display.h">
+    <ClInclude Include="TM1637\TM1637Display.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClCompile Include="..\arrayOP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\BatteryCharger\TM1637\TM1637Display.cpp">
+    <ClCompile Include="TM1637\TM1637Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
