@@ -12,8 +12,6 @@ C:\Users\17par\AppData\Local\Temp\VMBuilds\BatteryCharger\nano_atmega328\Debug\B
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs/pins_arduino.h \
  c:\program\ files\ (x86)\arduino\hardware\arduino\avr\variants\standard\pins_arduino.h \
- c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\ze3s3dil.pco\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Users\17par\AppData\Local\Temp\VMBuilds\BatteryCharger\nano_atmega328\Debug\arrayOp.h \
- C:\Users\17par\OneDrive\Documents\Arduino\libraries\TM1637/TM1637Display.h \
- C:\Users\17par\AppData\Local\Temp\VMBuilds\BatteryCharger\nano_atmega328\Debug\TM1637Display.h
+ C:\Users\17par\AppData\Local\Temp\VMBuilds\BatteryCharger\nano_atmega328\Debug\TM1637Display.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h

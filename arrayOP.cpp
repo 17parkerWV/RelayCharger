@@ -85,7 +85,6 @@ void ArrayOpClass::chargingTime(int bottom, int top)
     if (currentAmps >= 83 && currentAmps <= 87)
       powerX--;
     voltDisplay.showNumberDec(currentAmps * 2.564, 0, 4, 0);
-    Serial.println(currentAmps);
     currentAmps = 0;
     avgNum = 0;
     secondaryTime = millis();

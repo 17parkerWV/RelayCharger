@@ -1,6 +1,6 @@
 C:\Users\17par\AppData\Local\Temp\VMBuilds\BatteryCharger\nano_atmega328\Debug\TM1637Display.cpp.o: \
- C:\Users\17par\Desktop\TM1637\TM1637Display.cpp \
- C:\Users\17par\OneDrive\Documents\Arduino\libraries\TM1637/TM1637Display.h \
+ C:\Users\17par\source\repos\17parkerWV\RelayCharger\TM1637Display.cpp \
+ C:\Users\17par\source\repos\17parkerWV\RelayCharger\TM1637Display.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \

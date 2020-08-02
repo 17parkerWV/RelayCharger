@@ -24,16 +24,16 @@
     <ClInclude Include="..\arrayOP.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="TM1637\TM1637Display.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\TM1637Display.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\arrayOP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TM1637\TM1637Display.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\TM1637Display.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
