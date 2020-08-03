@@ -16,7 +16,9 @@ const int ampPin = A7;
 //prototypes and objects
 void cellSearch();
 void stop();
+void doneCharge();
 const uint8_t noBattery[4] = { 0b01010100,0b01011100,0b00000000,0b01111100 };	//says no b
+const uint8_t done[4] = { 0b00111111, 0b01011100, 0b01010100, 0b01111001 };
 ArrayOpClass bogusObj(relayPairs);
 TM1637Display countdown = TM1637Display(11, 12);
 
@@ -44,6 +46,7 @@ void setup() {
 	for (int tim = 0; tim <= 100; tim++) {
 		countdown.showNumberDec(100 - tim, 0, 4, 0);
 	}
+	Serial.begin(9600);
 }
 
 //Makes bogusObj and sends that to the cpp file where the bulk of the work is done
@@ -70,6 +73,7 @@ void cellSearch() {
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
 			chargeSum += analogRead(probePin);
 		}
+		Serial.println(chargeSum);
 		digitalWrite(bogusObj.relayPins[i][0], HIGH);
 		digitalWrite(bogusObj.relayPins[i][1], HIGH);
 		bogusObj.voltArray[i] = chargeSum;
@@ -84,6 +88,8 @@ void cellSearch() {
 	}
 	if (okToChargeFlag == false)
 		stop();
+	if (okToChargeFlag == false)
+		doneCharge();
 	return;
 }
 
@@ -92,5 +98,11 @@ void cellSearch() {
 void stop() {
 	countdown.clear();
 	countdown.setSegments(noBattery);
+	while (1);
+}
+
+void doneCharge() {
+	countdown.clear();
+	countdown.setSegments(done);
 	while (1);
 }

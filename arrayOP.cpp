@@ -63,6 +63,19 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 	unsigned long currentAmps = 0;
 	unsigned long avgNum = 0;
 	int runningCharge = 0;
+	for (int batIndex = 0; batIndex <= 3; batIndex++) {
+		if (masterObj.chargePos[batIndex] == 0)
+			continue;
+		if (masterObj.chargePos[batIndex] == 1)
+			voltDisplay.showNumberDec(batIndex);
+		delay(750);
+		float x;
+		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5191;			//THIS IS THE COEFFICIENT for volts
+		int y = round(x);
+		voltDisplay.showNumberDecEx(y, 0b01000000);
+		delay(1250);
+	}
+	voltDisplay.clear();
 	voltDisplay.showNumberDec(0, 0, 1, 3);
 	analogWrite(masterObj.pwmOutputPin, 255);
 	digitalWrite(masterObj.relayPins[bottom][0], LOW);
@@ -88,7 +101,7 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 			powerX--;
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
 			runningCharge += analogRead(masterObj.probeInputPin);
-		}	
+		}
 		if (runningCharge <= 300) {
 			voltDisplay.setSegments(fail);
 			break;
