@@ -14,7 +14,6 @@ private:
 	uint8_t pinDIO = 12;
 	unsigned int bitDelay = 100;
 	TM1637Display voltDisplay;
-
 public:
 	//These are the pointers for the charging functions and set up the array
 	int (ArrayOpClass::* onePtr)(double) = &ArrayOpClass::oneBat;
@@ -22,7 +21,7 @@ public:
 	int (ArrayOpClass::* threePtr)(double) = &ArrayOpClass::threeBat;
 	int (ArrayOpClass::* fourPtr)(double) = &ArrayOpClass::fourBat;
 	int (ArrayOpClass::* funcArray[4])(double);
-	//Class variables and constructors
+	//Class variables
 	int voltArray[4];
 	int probeInputPin = 0;
 	int pwmOutputPin = 0;
@@ -31,11 +30,12 @@ public:
 	int chargePos[4];
 	const uint8_t done[4] = { 0b00111111, 0b01011100, 0b01010100, 0b01111001 };
 	const uint8_t fail[4] = { 0b01110001,0b01110111,0b00110000,0b00111000 };
+	//These are constructors, no arg is for masterObj in .cpp, other is for bogusObj in .ino
 	ArrayOpClass() {
 		int probeInputPin = 0;
 		int pwmOutputPin = 0;
 	}
-	ArrayOpClass(int arr[][2])
+	ArrayOpClass(int arr[][2])			//Constructor for bogusObj in the .ino, to pass the relay pin array to mastersweep via operator= overload
 	{
 		for (int row = 0; row <= 1; row++) {
 			for (int col = 0; col <= 3; col++) {
@@ -45,8 +45,8 @@ public:
 		int probeInputPin = 0;
 		int pwmOutputPin = 0;
 	}
-	//The assignment operator overload is to assign one object to another
-	void operator=(const ArrayOpClass& obj)
+	//Operator= Overload
+	void operator=(const ArrayOpClass& obj)					//The assignment operator overload is to assign one object to another
 	{
 		probeInputPin = obj.probeInputPin;
 		pwmOutputPin = obj.pwmOutputPin;
@@ -60,11 +60,7 @@ public:
 				relayPins[col][row] = obj.relayPins[col][row];
 			}
 		}
-	}
-	//Just the class functions
-	void masterSweep(ArrayOpClass);
-	void chargingTime(int, int);
-
+	}	
 	//These are for battery charging
 	int oneBat(double x) {
 		int pow = 0;
@@ -86,6 +82,9 @@ public:
 		pow = (245.0 / (x + 1.0) + 10.0);
 		return pow;
 	}
+	//Just the class functions
+	void masterSweep(ArrayOpClass);
+	void chargingTime(int, int);
 	int findLow();
 	int findHigh(int);
 	void arrayStop();
