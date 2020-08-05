@@ -68,8 +68,8 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 			voltDisplay.showNumberDec(batIndex + 1);
 		delay(650);
 		float x;
-		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5204;			//THIS IS THE COEFFICIENT for volts
-		int y = round(x);
+		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5124;			//THIS IS THE COEFFICIENT old was .5124 ish
+		int y = round(x);														//THE COEFFICIENT IS WRONG, might be .5204-ish
 		voltDisplay.showNumberDecEx(y, 0b01000000);
 		delay(1000);
 	}
