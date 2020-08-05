@@ -67,10 +67,10 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 		if (masterObj.chargePos[batIndex] == 0)
 			continue;
 		if (masterObj.chargePos[batIndex] == 1)
-			voltDisplay.showNumberDec(batIndex);
+			voltDisplay.showNumberDec(batIndex + 1);
 		delay(750);
 		float x;
-		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5191;			//THIS IS THE COEFFICIENT for volts
+		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5204;			//THIS IS THE COEFFICIENT for volts
 		int y = round(x);
 		voltDisplay.showNumberDecEx(y, 0b01000000);
 		delay(1250);
@@ -93,7 +93,9 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 		powerY = (masterObj.*(masterObj.funcArray[top - bottom]))(powerX);
 		if (currentAmps >= 90) {
 			analogWrite(masterObj.pwmOutputPin, 255);
-			arrayStop();
+			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
+			digitalWrite(masterObj.relayPins[top][1], HIGH);
+			overAmp();
 		}
 		if (currentAmps < 78)
 			powerX++;
@@ -102,9 +104,12 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
 			runningCharge += analogRead(masterObj.probeInputPin);
 		}
+		Serial.println(powerY);
 		if (runningCharge <= 300) {
-			voltDisplay.setSegments(fail);
-			break;
+			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
+			digitalWrite(masterObj.relayPins[top][1], HIGH);
+			analogWrite(masterObj.pwmOutputPin, HIGH);
+			arrayStop();
 		}
 		runningCharge = 0;
 		voltDisplay.showNumberDec(currentAmps * 2.564, 0, 4, 0);
@@ -124,4 +129,10 @@ void ArrayOpClass::arrayStop() {
 		voltDisplay.setSegments(fail);
 		while (1);
 	}
+}
+
+void ArrayOpClass::overAmp() {
+	voltDisplay.clear();
+	voltDisplay.setSegments(current);
+	while (1);
 }

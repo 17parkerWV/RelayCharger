@@ -31,6 +31,7 @@ public:
 	int lowestBat[2] = { 0,0 };			//This is for the lowest battery, [0] is batt number and [1] is charge level
 	const uint8_t done[4] = { 0b00111111, 0b01011100, 0b01010100, 0b01111001 };
 	const uint8_t fail[4] = { 0b01110001,0b01110111,0b00110000,0b00111000 };
+	const uint8_t current[4] = { 0b011100010,0b00000000,0b00111111,0b00111001 };
 	//These are constructors, no arg is for masterObj in .cpp, other is for bogusObj in .ino
 	ArrayOpClass() {
 		int probeInputPin = 0;
@@ -75,12 +76,12 @@ public:
 	}
 	int threeBat(double x) {
 		int pow = 0;
-		pow = (70.0 / (.7 * x + 1.0) + 185.0);
+		pow = (65.0 / (.4 * x + 1.0) + 190.0);
 		return pow;
 	}
 	int fourBat(double x) {
 		int pow = 0;
-		pow = (245.0 / (x + 1.0) + 10.0);
+		pow = (165.0 / (.8*x + 1.0) + 90.0);	
 		return pow;
 	}
 	//Just the class functions
@@ -89,6 +90,7 @@ public:
 	int findLow();
 	int findHigh(int);
 	void arrayStop();
+	void overAmp();
 };
 extern ArrayOpClass ArrayOp;
 #endif
