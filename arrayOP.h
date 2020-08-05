@@ -15,8 +15,8 @@ private:
 	unsigned int bitDelay = 100;
 	TM1637Display voltDisplay;
 public:
-	//These are the pointers for the charging functions and set up the array
-	int (ArrayOpClass::* onePtr)(double) = &ArrayOpClass::oneBat;
+	//This first chunk until the functions below is just initializing stuff for the functions
+	int (ArrayOpClass::* onePtr)(double) = &ArrayOpClass::oneBat;		//These are the pointers for the charging functions and set up the array
 	int (ArrayOpClass::* twoPtr)(double) = &ArrayOpClass::twoBat;
 	int (ArrayOpClass::* threePtr)(double) = &ArrayOpClass::threeBat;
 	int (ArrayOpClass::* fourPtr)(double) = &ArrayOpClass::fourBat;
@@ -32,6 +32,7 @@ public:
 	const uint8_t done[4] = { 0b00111111, 0b01011100, 0b01010100, 0b01111001 };
 	const uint8_t fail[4] = { 0b01110001,0b01110111,0b00110000,0b00111000 };
 	const uint8_t current[4] = { 0b011100010,0b00000000,0b00111111,0b00111001 };
+	
 	//These are constructors, no arg is for masterObj in .cpp, other is for bogusObj in .ino
 	ArrayOpClass() {
 		int probeInputPin = 0;
@@ -47,8 +48,7 @@ public:
 		int probeInputPin = 0;
 		int pwmOutputPin = 0;
 	}
-	//Operator= Overload
-	void operator=(const ArrayOpClass& obj)					//The assignment operator overload is to assign one object to another
+	void operator=(const ArrayOpClass& obj)			//The assignment operator overload is to assign one object to another
 	{
 		probeInputPin = obj.probeInputPin;
 		pwmOutputPin = obj.pwmOutputPin;

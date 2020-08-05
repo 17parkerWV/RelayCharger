@@ -1,7 +1,7 @@
 #include "arrayOp.h"
 #include "TM1637Display.h"
-
 ArrayOpClass masterObj;
+
 //Mastersweep: assigns objects from bogusObj to masterObj
 //activates the display and searches for the pins and then goes into the charging loop
 void ArrayOpClass::masterSweep(ArrayOpClass tempObj)
@@ -21,8 +21,8 @@ void ArrayOpClass::masterSweep(ArrayOpClass tempObj)
 	return;
 }
 
-//finds the "ground relay" for charging, returns -1 if there is an error to prevent catastrophe
-int ArrayOpClass::findLow()
+
+int ArrayOpClass::findLow()		//finds the "ground relay" for charging, returns -1 if there is an error to prevent catastrophe
 {
 	int seek = -1;
 	for (int i = 0; i <= 3; i++) {
@@ -34,8 +34,7 @@ int ArrayOpClass::findLow()
 	}
 	return seek;
 }
-//find the "high relay", returns -1 if there is an error to prevent catastrophe
-int ArrayOpClass::findHigh(int initial)
+int ArrayOpClass::findHigh(int initial)			//find the "high relay", returns -1 if there is an error to prevent catastrophe
 {
 	int upper = -1;
 	if (masterObj.chargePos[initial] == 1) {
@@ -50,9 +49,8 @@ int ArrayOpClass::findHigh(int initial)
 	return upper;
 }
 
-//This is it!
-//Pointers to member functions in an array to simplify the power-level-search/select process
-void ArrayOpClass::chargingTime(int bottom, int top)
+
+void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member functions in an array to simplify the power-level-search/select process
 {
 	masterObj.funcArray[0] = masterObj.onePtr;					//SETUP START
 	masterObj.funcArray[1] = masterObj.twoPtr;
@@ -68,12 +66,12 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 			continue;
 		if (masterObj.chargePos[batIndex] == 1)
 			voltDisplay.showNumberDec(batIndex + 1);
-		delay(750);
+		delay(650);
 		float x;
 		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5204;			//THIS IS THE COEFFICIENT for volts
 		int y = round(x);
 		voltDisplay.showNumberDecEx(y, 0b01000000);
-		delay(1250);
+		delay(1000);
 	}
 	voltDisplay.clear();
 	voltDisplay.showNumberDec(0, 0, 1, 3);
@@ -104,7 +102,6 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
 			runningCharge += analogRead(masterObj.probeInputPin);
 		}
-		Serial.println(powerY);
 		if (runningCharge <= 300) {
 			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
 			digitalWrite(masterObj.relayPins[top][1], HIGH);
@@ -123,7 +120,7 @@ void ArrayOpClass::chargingTime(int bottom, int top)
 	return;
 }
 
-void ArrayOpClass::arrayStop() {
+void ArrayOpClass::arrayStop() {		//Stops when there is an error other than over current
 	{
 		voltDisplay.clear();
 		voltDisplay.setSegments(fail);
@@ -131,7 +128,7 @@ void ArrayOpClass::arrayStop() {
 	}
 }
 
-void ArrayOpClass::overAmp() {
+void ArrayOpClass::overAmp() {		//Stops when current gets too high
 	voltDisplay.clear();
 	voltDisplay.setSegments(current);
 	while (1);
