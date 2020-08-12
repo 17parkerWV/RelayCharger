@@ -61,6 +61,7 @@ void loop() {
 
 //find the cells that need to be charged, else stop() program
 //"returns the array" of which cells are low, if none need charging stop() the program
+//THE RELAYS ARE ON WHEN PINS ARE LOW AND OFF WHEN PINS ARE HIGH FOR SOME REASON
 void cellSearch() {
 	int chargeSum = 0;
 	static int c[4] = { 0, 0, 0, 0 };
@@ -69,7 +70,7 @@ void cellSearch() {
 	for (int i = 0; i <= 3; i++) {						//Sets pins for relay, reads the probe pin, shuts off relay
 		digitalWrite(bogusObj.relayPins[i][0], LOW);
 		digitalWrite(bogusObj.relayPins[i][1], LOW);
-		delay(150);
+		delay(200);
 		chargeSum = 0;
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {		//measures and adds input from probe
 			chargeSum += analogRead(probePin);
