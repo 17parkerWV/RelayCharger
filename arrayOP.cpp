@@ -14,7 +14,7 @@ void ArrayOpClass::masterSweep(ArrayOpClass tempObj)
 		arrayStop();
 	int high = findHigh(low);
 	if (high == -1)
-		arrayStop();							//END SAFEGUARDS
+		arrayStop();					//END SAFEGUARDS
 	chargingTime(low, high);
 	voltDisplay.clear();		//THIS IS TEMPORARY, NEED TO PUT IN END OF CHARGE CYCLE FUNCTIONS
 	delay(2000);				//THIS IS TO DRAIN THE CAPACITOR
@@ -42,7 +42,7 @@ int ArrayOpClass::findHigh(int initial)			//find the "high relay", returns -1 if
 	}
 	for (int i = (initial + 1); i <= 3; i++) {
 		if (masterObj.chargePos[i] == 0)
-			continue;
+			break;
 		if (masterObj.chargePos[i] == 1)
 			upper = i;
 	}
