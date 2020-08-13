@@ -67,8 +67,8 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 			voltDisplay.showNumberDec(batIndex + 1);
 		delay(650);
 		float x;
-		x = static_cast<float>(masterObj.voltArray[batIndex]) *.48876;	//This is just (5/1023)*100
-		int y = round(x);														
+		x = static_cast<float>(masterObj.voltArray[batIndex]+13.0) * 0.48876;	//This is just (5/1023)*100
+		int y = round(x);
 		voltDisplay.showNumberDecEx(y, 0b01000000);
 		delay(1000);
 	}
@@ -104,7 +104,6 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 			digitalWrite(masterObj.relayPins[top][1], HIGH);
 			arrayStop();
 		}
-		Serial.println(currentAmps);
 		voltDisplay.showNumberDec(currentAmps * 2.564, 0, 4, 0);
 		currentAmps = 0;
 		avgNum = 0;

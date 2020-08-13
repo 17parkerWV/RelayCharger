@@ -76,6 +76,7 @@ void cellSearch() {
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {		//measures and adds input from probe
 			chargeSum += analogRead(probePin);
 		}
+		Serial.println(chargeSum);
 		digitalWrite(bogusObj.relayPins[i][0], HIGH);
 		digitalWrite(bogusObj.relayPins[i][1], HIGH);
 		bogusObj.voltArray[i] = int(chargeSum);

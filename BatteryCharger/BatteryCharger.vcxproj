@@ -128,7 +128,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.build.auto_discover_includes="0" config.Debug.customdebug_nano_atmega328_debugger_type="none" config.Release.customdebug_nano_atmega328_debugger_type="none" debug.view.FreeMemory="" />
+      <UserProperties arduino.build.auto_discover_includes="0" arduino.upload.port="COM4" config.Debug.customdebug_nano_atmega328_debugger_type="none" config.Release.customdebug_nano_atmega328_debugger_type="none" debug.view.FreeMemory="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
