@@ -47,6 +47,7 @@ void setup() {
 		countdown.showNumberDec(100 - tim, 0, 4, 0);
 	}
 	countdown.clear();
+	Serial.begin(115200);
 }
 
 //Makes bogusObj and sends that to the cpp file where the bulk of the work is done
@@ -63,29 +64,29 @@ void loop() {
 //"returns the array" of which cells are low, if none need charging stop() the program
 //THE RELAYS ARE ON WHEN PINS ARE LOW AND OFF WHEN PINS ARE HIGH FOR SOME REASON
 void cellSearch() {
-	int chargeSum = 0;
+	float chargeSum = 0.0;
 	static int c[4] = { 0, 0, 0, 0 };
 	bool okToChargeFlag = false;
 	bool doneChargeFlag = 0;
 	for (int i = 0; i <= 3; i++) {						//Sets pins for relay, reads the probe pin, shuts off relay
 		digitalWrite(bogusObj.relayPins[i][0], LOW);
 		digitalWrite(bogusObj.relayPins[i][1], LOW);
-		delay(200);
+		delay(150);
 		chargeSum = 0;
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {		//measures and adds input from probe
 			chargeSum += analogRead(probePin);
 		}
 		digitalWrite(bogusObj.relayPins[i][0], HIGH);
 		digitalWrite(bogusObj.relayPins[i][1], HIGH);
-		bogusObj.voltArray[i] = chargeSum;
-		if (chargeSum < 805 && chargeSum > 550) {               //CUTOFF VALUE
+		bogusObj.voltArray[i] = int(chargeSum);
+		if (chargeSum < 840 && chargeSum > 550) {               //CUTOFF VALUE
 			bogusObj.chargePos[i] = 1;
 			okToChargeFlag = true;
 		}
-		if (chargeSum >= 805 || chargeSum <= 550) {             //CUTOFF VALUE
+		if (chargeSum >= 840 || chargeSum <= 550) {             //CUTOFF VALUE
 			bogusObj.chargePos[i] = 0;
 		}
-		if (chargeSum > 805) {
+		if (chargeSum > 840) {
 			doneChargeFlag = true;
 		}
 		delay(150);

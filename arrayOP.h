@@ -66,17 +66,17 @@ public:
 	//These are for battery charging
 	int oneBat(double x) {
 		int pow = 0;
-		pow = (35.0 / (.5 * x + 1.0) + 220.0);
+		pow = (36.0 / (.4 * x + 1.0) + 219.0);
 		return pow;
 	}
 	int twoBat(double x) {
 		int pow = 0;
-		pow = (47.0 / (.5 * x + 1.0) + 208.0);
+		pow = (52.0 / (.33 * x + 1.0) + 203.0);
 		return pow;
 	}
 	int threeBat(double x) {
 		int pow = 0;
-		pow = (65.0 / (.4 * x + 1.0) + 190.0);
+		pow = (70.0 / (.4 * x + 1.0) + 185.0);
 		return pow;
 	}
 	int fourBat(double x) {

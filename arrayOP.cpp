@@ -16,7 +16,7 @@ void ArrayOpClass::masterSweep(ArrayOpClass tempObj)
 	if (high == -1)
 		arrayStop();					//END SAFEGUARDS
 	chargingTime(low, high);
-	voltDisplay.clear();		//THIS IS TEMPORARY, NEED TO PUT IN END OF CHARGE CYCLE FUNCTIONS
+	voltDisplay.clear();		//THIS IS TEMPORARY, NEED TO PUT IN END OF CHARGE CYCLE FUNCTIONS (I THINK)
 	delay(2000);				//THIS IS TO DRAIN THE CAPACITOR
 	return;
 }
@@ -60,7 +60,6 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 	int powerY = 255;
 	unsigned long currentAmps = 0;
 	unsigned long avgNum = 0;
-	int runningCharge = 0;
 	for (int batIndex = 0; batIndex <= 3; batIndex++) {
 		if (masterObj.chargePos[batIndex] == 0)
 			continue;
@@ -68,8 +67,8 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 			voltDisplay.showNumberDec(batIndex + 1);
 		delay(650);
 		float x;
-		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5124;			//THIS IS THE COEFFICIENT old was .5124 ish
-		int y = round(x);														//THE COEFFICIENT IS WRONG, might be .5204-ish
+		x = static_cast<float>(masterObj.voltArray[batIndex]) *.48876;	//This is just (5/1023)*100
+		int y = round(x);														
 		voltDisplay.showNumberDecEx(y, 0b01000000);
 		delay(1000);
 	}
@@ -89,7 +88,7 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 		}			//end minor loop
 		currentAmps /= avgNum;
 		powerY = (masterObj.*(masterObj.funcArray[top - bottom]))(powerX);
-		if (currentAmps >= 90) {
+		if (currentAmps > 88) {
 			analogWrite(masterObj.pwmOutputPin, 255);
 			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
 			digitalWrite(masterObj.relayPins[top][1], HIGH);
@@ -97,18 +96,15 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 		}
 		if (currentAmps < 78)
 			powerX++;
-		if (currentAmps >= 83 && currentAmps <= 87)
+		if (currentAmps >= 83 && currentAmps <= 88)
 			powerX--;
-		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
-			runningCharge += analogRead(masterObj.probeInputPin);
-		}
-		if (runningCharge <= 300) {
+		if (powerX > 6 && currentAmps <= 5) {
+			analogWrite(masterObj.pwmOutputPin, 255);
 			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
 			digitalWrite(masterObj.relayPins[top][1], HIGH);
-			analogWrite(masterObj.pwmOutputPin, HIGH);
 			arrayStop();
 		}
-		runningCharge = 0;
+		Serial.println(currentAmps);
 		voltDisplay.showNumberDec(currentAmps * 2.564, 0, 4, 0);
 		currentAmps = 0;
 		avgNum = 0;
