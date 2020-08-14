@@ -87,7 +87,7 @@ void cellSearch() {
 		if (chargeSum >= 840 || chargeSum <= 550) {             //CUTOFF VALUE
 			bogusObj.chargePos[i] = 0;
 		}
-		if (chargeSum > 840) {
+		if (chargeSum >= 840) {
 			doneChargeFlag = true;
 		}
 		delay(150);
