@@ -89,17 +89,15 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 		}			//end minor loop
 		currentAmps /= avgNum;
 		powerY = (masterObj.*(masterObj.funcArray[top - bottom]))(powerX);
-		/*
-		if (currentAmps >= 90) {
+		if (currentAmps >= 120) {
 			analogWrite(masterObj.pwmOutputPin, 255);
 			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
 			digitalWrite(masterObj.relayPins[top][1], HIGH);
 			overAmp();
 		}
-		*/
 		if (currentAmps < 102)
 			powerX++;
-		if (currentAmps >= 108 && currentAmps <= 112)
+		if (currentAmps >= 108 && currentAmps <= 119)
 			powerX--;
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
 			runningCharge += analogRead(masterObj.probeInputPin);

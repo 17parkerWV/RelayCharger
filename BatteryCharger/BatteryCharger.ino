@@ -79,11 +79,11 @@ void cellSearch() {
 		digitalWrite(bogusObj.relayPins[i][0], HIGH);
 		digitalWrite(bogusObj.relayPins[i][1], HIGH);
 		bogusObj.voltArray[i] = chargeSum;
-		if (chargeSum < 820 && chargeSum > 550) {               //CUTOFF VALUE
+		if (chargeSum < 830 && chargeSum > 550) {               //CUTOFF VALUE
 			bogusObj.chargePos[i] = 1;
 			okToChargeFlag = true;
 		}
-		if (chargeSum >= 820 || chargeSum <= 550) {             //CUTOFF VALUE
+		if (chargeSum >= 830 || chargeSum <= 550) {             //CUTOFF VALUE
 			bogusObj.chargePos[i] = 0;
 		}
 		if (chargeSum > 805) {
