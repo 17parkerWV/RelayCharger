@@ -66,22 +66,22 @@ public:
 	//These are for battery charging
 	int oneBat(double x) {
 		int pow = 0;
-		pow = (35.0 / (.5 * x + 1.0) + 220.0);
+		pow = (37.0 / (.28 * x + 1.0) + 218.0);
 		return pow;
 	}
 	int twoBat(double x) {
 		int pow = 0;
-		pow = (47.0 / (.5 * x + 1.0) + 208.0);
+		pow = (45.0 / (.25 * x + 1.0) + 205.0);
 		return pow;
 	}
 	int threeBat(double x) {
 		int pow = 0;
-		pow = (65.0 / (.4 * x + 1.0) + 190.0);
+		pow = (65.0 / (.3 * x + 1.0) + 190.0);
 		return pow;
 	}
 	int fourBat(double x) {
 		int pow = 0;
-		pow = (165.0 / (.8*x + 1.0) + 90.0);	
+		pow = (175.0 / (.4*x + 1.0) + 80.0);	
 		return pow;
 	}
 	//Just the class functions

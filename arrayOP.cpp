@@ -68,7 +68,7 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 			voltDisplay.showNumberDec(batIndex + 1);
 		delay(650);
 		float x;
-		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5124;			//THIS IS THE COEFFICIENT old was .5124 ish
+		x = static_cast<float>(masterObj.voltArray[batIndex]) * .5085;			//THIS IS THE COEFFICIENT old was .5124 ish
 		int y = round(x);														//THE COEFFICIENT IS WRONG, might be .5204-ish
 		voltDisplay.showNumberDecEx(y, 0b01000000);
 		delay(1000);
@@ -89,15 +89,17 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 		}			//end minor loop
 		currentAmps /= avgNum;
 		powerY = (masterObj.*(masterObj.funcArray[top - bottom]))(powerX);
+		/*
 		if (currentAmps >= 90) {
 			analogWrite(masterObj.pwmOutputPin, 255);
 			digitalWrite(masterObj.relayPins[bottom][0], HIGH);
 			digitalWrite(masterObj.relayPins[top][1], HIGH);
 			overAmp();
 		}
-		if (currentAmps < 78)
+		*/
+		if (currentAmps < 102)
 			powerX++;
-		if (currentAmps >= 83 && currentAmps <= 87)
+		if (currentAmps >= 108 && currentAmps <= 112)
 			powerX--;
 		for (int probeLoop = 0; probeLoop <= 3; probeLoop++) {
 			runningCharge += analogRead(masterObj.probeInputPin);
@@ -108,8 +110,9 @@ void ArrayOpClass::chargingTime(int bottom, int top)		//Pointers to member funct
 			analogWrite(masterObj.pwmOutputPin, HIGH);
 			arrayStop();
 		}
+		Serial.println(powerX);
 		runningCharge = 0;
-		voltDisplay.showNumberDec(currentAmps * 2.564, 0, 4, 0);
+		voltDisplay.showNumberDec(currentAmps * 2.421, 0, 4, 0);
 		currentAmps = 0;
 		avgNum = 0;
 		secondaryTime = millis();
